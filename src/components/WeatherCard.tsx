@@ -23,13 +23,13 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
   const { name, main, weather, wind } = data;
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mt-4 w-80 text-center">
+    <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md shadow-lg rounded-xl p-6 w-full max-w-md mx-auto text-center border border-gray-200 dark:border-gray-700">
       <h2 className="text-2xl font-semibold mb-2">{name}</h2>
       {weather.length > 0 ? (
         <img
           src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
           alt={weather[0].description}
-          className="mx-auto"
+          className="mx-auto w-20 h-20 animate-bounce"
         />
       ) : (
         <p className="text-sm text-gray-500">No icon available</p>
