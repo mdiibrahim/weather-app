@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         }
 
         setSuggestions(
-          json.data.map((item: any) => ({
+          json.data.map((item: { city: string; country: string }) => ({
             city: item.city,
             country: item.country,
           }))
@@ -106,95 +106,102 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-md mx-auto text-center border border-gray-200 dark:border-gray-700 transition-all space-y-6 relative">
-      <h1 className="text-3xl font-extrabold mb-2 flex justify-center items-center gap-2">
-        <span role="img" aria-label="weather">
-          ⛅
-        </span>{" "}
-        Weather App
-      </h1>
-
-      <div className="relative">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Enter city name"
-          className="p-2 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600"
-        />
-
-        {suggestionLoading && (
-          <div className="absolute bg-white dark:bg-gray-800 border w-full mt-1 p-2 text-sm text-gray-500 dark:text-gray-300 rounded shadow z-10">
-            Searching...
+    <div className="bg-white/20 dark:bg-gray-800/30   rounded-2xl p-8 w-full max-w-md mx-auto text-center border border-gray-200 dark:border-gray-700  space-y-6 relative">
+      <main className="flex-1 flex items-center justify-center px-4 py-10">
+        <div className="w-full      space-y-5">
+          <div className="text-center space-y-2 mb-4">
+            <h2 className="text-lg font-bold tracking-tight">
+              Know the weather. Instantly. Beautifully.
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xs mx-auto">
+              Type your city name, get real-time weather updates, and stay
+              ahead. 🌦️
+            </p>
           </div>
-        )}
 
-        {!suggestionLoading && suggestions.length > 0 && (
-          <ul
-            ref={suggestionRef}
-            className="absolute bg-white dark:bg-gray-800 border border-gray-300 w-full mt-1 rounded z-10 shadow max-h-40 overflow-y-auto"
-          >
-            {suggestions.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => {
-                  setInput(item.city);
-                  setSuggestions([]);
-                }}
-                className={`px-4 py-2 cursor-pointer ${
-                  index === highlightedIndex
-                    ? "bg-blue-100 dark:bg-gray-600"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-600"
-                }`}
-              >
-                {item.city}, {item.country}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+          <div className="relative">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Enter city name"
+              className="p-2 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:border-gray-600"
+            />
 
-      <button
-        onClick={() => handleSearch()}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-400 transition"
-      >
-        Search
-      </button>
-
-      {history.length > 0 && (
-        <div className="text-left">
-          <p className="font-semibold mb-2">Recent Searches:</p>
-          <div className="flex flex-wrap gap-2">
-            {history.map((city, index) => (
-              <div
-                key={index}
-                className="flex items-center bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 text-sm transition"
-              >
-                <button
-                  onClick={() => handleSearch(city)}
-                  className="mr-2 focus:outline-none"
-                >
-                  {city}
-                </button>
-                <button
-                  onClick={() => removeFromHistory(city)}
-                  className="text-red-500 hover:text-red-700 focus:outline-none"
-                  aria-label={`Remove ${city}`}
-                >
-                  ❌
-                </button>
+            {suggestionLoading && (
+              <div className="absolute bg-white dark:bg-gray-800 border w-full mt-1 p-2 text-sm text-gray-500 dark:text-gray-300 rounded shadow z-10">
+                Searching...
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+            )}
 
-      {loading && (
-        <p className="text-blue-600 dark:text-blue-300">Loading...</p>
-      )}
-      {error && <p className="text-red-500">{error}</p>}
-      {data && <WeatherCard data={data} />}
+            {!suggestionLoading && suggestions.length > 0 && (
+              <ul
+                ref={suggestionRef}
+                className="absolute bg-white dark:bg-gray-800 border border-gray-300 w-full mt-1 rounded z-10 shadow max-h-40 overflow-y-auto"
+              >
+                {suggestions.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setInput(item.city);
+                      setSuggestions([]);
+                    }}
+                    className={`px-4 py-2 cursor-pointer ${
+                      index === highlightedIndex
+                        ? "bg-blue-100 dark:bg-gray-600"
+                        : "hover:bg-gray-100 dark:hover:bg-gray-600"
+                    }`}
+                  >
+                    {item.city}, {item.country}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <button
+            onClick={() => handleSearch()}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-400 transition"
+          >
+            Search
+          </button>
+
+          {history.length > 0 && (
+            <div className="text-left">
+              <p className="font-semibold mb-2">Recent Searches:</p>
+              <div className="flex flex-wrap gap-2">
+                {history.map((city, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 text-sm transition"
+                  >
+                    <button
+                      onClick={() => handleSearch(city)}
+                      className="mr-2 focus:outline-none"
+                    >
+                      {city}
+                    </button>
+                    <button
+                      onClick={() => removeFromHistory(city)}
+                      className="text-red-500 hover:text-red-700 focus:outline-none"
+                      aria-label={`Remove ${city}`}
+                    >
+                      ❌
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {loading && (
+            <p className="text-blue-600 dark:text-blue-300">Loading...</p>
+          )}
+          {error && <p className="text-red-500">{error}</p>}
+          {data && <WeatherCard data={data} />}
+        </div>
+      </main>
     </div>
   );
 };

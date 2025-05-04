@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -18,16 +20,39 @@ const App: React.FC = () => {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors">
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="bg-gray-300 dark:bg-gray-700 px-4 py-1 rounded text-sm"
-        >
-          {darkMode ? "☀️ Light" : "🌙 Dark"}
-        </button>
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExejczam03MmV3cnZ1Y2hmcnFlMnhlazl0NXdpODFxdndraHozNmRyaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S4LEKuMr2Uco/giphy.gif"
+          className="w-full h-full object-cover opacity-100"
+        />
       </div>
-      <Home />
+
+      <div className="relative z-10 flex flex-col min-h-screen bg-gray-100/60 dark:bg-gray-900/60 text-gray-900 dark:text-white transition-colors">
+        {/* Header */}
+        <div className="w-full border-b border-blue-200 dark:border-blue-800 bg-blue-100 dark:bg-blue-950">
+          <div className="max-w-screen-md mx-auto w-full px-4">
+            <Header
+              darkMode={darkMode}
+              toggleDarkMode={() => setDarkMode(!darkMode)}
+            />
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <main className="flex-1 flex items-center justify-center py-10">
+          <div className="w-full max-w-screen-md px-4">
+            <Home />
+          </div>
+        </main>
+
+        {/* Footer */}
+        <div className="w-full border-t border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
+          <div className="max-w-screen-md mx-auto w-full px-4">
+            <Footer />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
