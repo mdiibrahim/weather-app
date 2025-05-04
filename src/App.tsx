@@ -47,7 +47,7 @@ const App: React.FC = () => {
         </main>
 
         {/* Footer */}
-        <div className="w-full border-t border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
+        <div className="w-full border-t border-blue-200 bg-blue-100 dark:border-blue-800 ">
           <div className="max-w-screen-md mx-auto w-full px-4">
             <Footer />
           </div>

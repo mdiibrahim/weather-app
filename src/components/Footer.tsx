@@ -2,12 +2,12 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-blue-50 dark:bg-blue-950 border-t border-blue-200 dark:border-blue-800">
-      <div className="max-w-screen-md mx-auto w-full px-4 py-4 text-center text-sm text-blue-800 dark:text-blue-300 space-y-1">
+    <footer className="  border-t border-gray-300 dark:border-gray-700">
+      <div className="max-w-screen-md mx-auto w-full px-4 py-4 text-center text-sm text-gray-700 dark:text-gray-300 space-y-1">
         <p className="flex justify-center items-center gap-1 flex-wrap">
           Designed & built with ❤️ by{" "}
           <a
-            href="https://github.com/mdiibrahim"
+            href="https://github.com/mohammadibrahim-dev"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
